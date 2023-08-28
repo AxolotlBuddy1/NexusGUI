@@ -1,0 +1,140 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Nexus GUI",
+   LoadingTitle = "Nexus Admin",
+   LoadingSubtitle = "by VallenV33 on roblox",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Nexus Key System",
+      Subtitle = "Key is needed to verify your not a bot.",
+      Note = "Key is included in a message. The owner will respond to you with a key. Please message him on roblox [VallenV33]",
+      FileName = "examplehubkey", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"2137"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local Tab = Window:CreateTab("Home Page", nil) -- Title, Image
+local Section = Tab:CreateSection("UI's")
+
+Rayfield:Notify({
+   Title = "Nexus GUI System !",
+   Content = "Exploiting can get you permamently banned! The Owner of this panel is not responsible for any damage",
+   Duration = 6.5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "I understand and continue",
+         Callback = function()
+         print("I Understood")
+      end
+   },
+},
+})
+
+Rayfield:Notify({
+   Title = "Nexus GUI System ⚙",
+   Content = "Welcome to Nexus GUI! This menu is currently in demo. Expect more soon!",
+   Duration = 6.5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "Okay!",
+         Callback = function()
+         print("The user tapped Okay!")
+      end
+   },
+},
+})
+
+local Button = Tab:CreateButton({
+   Name = "Infinite Yield UI",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "DarkDex UI",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+   end,
+})
+
+local PlayerTab = Window:CreateTab("Player", nil) -- Title, Image
+local Section = PlayerTab:CreateSection("Player Settings")
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "Walk Speed Slider",
+   Range = {16, 300},
+   Increment = 1,
+   Suffix = "speed",
+   CurrentValue = 16,
+   Flag = "walkspeed", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value) -- Change player's walk speed to 15
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "Jump Power Slider",
+   Range = {50, 800},
+   Increment = 1,
+   Suffix = "jumppower",
+   CurrentValue = 16,
+   Flag = "jumppowerslider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    game.Players.LocalPlayer.Characther.Humanoid.UseJumpPower = true
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local MiscTab = Window:CreateTab("Misc", nil) -- Title, Image
+local Section = MiscTab:CreateSection("RGB Color Picker")
+
+local ColorPicker = MiscTab:CreateColorPicker({
+    Name = "Color Picker",
+    Color = Color3.fromRGB(255,255,255),
+    Flag = "ColorPicker", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+local SettingsTab = Window:CreateTab("Settings", nil) -- Title, Image
+local Section = SettingsTab:CreateSection("Emergency")
+
+local Button = SettingsTab:CreateButton({
+   Name = "Self Destruct",
+   Callback = function()
+   Rayfield:Notify({
+   Title = "Nexus GUI !",
+   Content = "Do you agree to self destruct the panel? The Script can be runned again at any time.",
+   Duration = 6.5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "Yes",
+         Callback = function()
+         Rayfield:Destroy()
+      end
+   },
+},
+})
+   end,
+})
